@@ -6,7 +6,7 @@ require 'gossip'
 class ApplicationController < Sinatra::Base
  
 
-  run! if app_file == $0
+
 
   #get '/' do
     #erb :index
@@ -21,9 +21,15 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/gossips/new/' do
-    puts Gossip.new(params["gossip_author"], params["gossip_content"]).save
+    Gossip.new(params["gossip_author"], params["gossip_content"]).save
     redirect '/'
   end
+
+  get '/gossips/:id' do
+   index = params[:id]
+   Gossip.find(index)
+  end
+
 end
 
 
