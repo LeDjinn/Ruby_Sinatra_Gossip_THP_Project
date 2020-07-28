@@ -24,11 +24,10 @@ class ApplicationController < Sinatra::Base
     Gossip.new(params["gossip_author"], params["gossip_content"]).save
     redirect '/'
   end
-
+  
   get '/gossips/:id' do
-   index = params[:id]
-   Gossip.find(index)
-  end
+	  erb :gossip, locals: {id: params['id'].to_i, gossips: Gossip.find(params['id'].to_i)}
+	end
 
 end
 
